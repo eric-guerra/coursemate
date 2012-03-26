@@ -1,0 +1,4 @@
+Django>=4.2,<5.3
+pytest>=8
+pytest-django>=4.8
+# for PostgreSQL (set DATABASE_NAME): psycopg[binary]>=3.1
