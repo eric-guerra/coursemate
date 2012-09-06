@@ -1,0 +1,49 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CourseMate</title>
+  <link rel="stylesheet" href="{% static 'scheduler/style.css' %}">
+</head>
+<body>
+  <header><h1>CourseMate</h1><p>Pick your courses and get every conflict-free schedule, ranked.</p></header>
+  <main class="layout">
+    <section class="panel">
+      <h2>1. Courses</h2>
+      <input id="course-q" type="search" placeholder="Search e.g. COSC or Algorithms" autocomplete="off">
+      <ul id="course-results" class="results"></ul>
+      <h3>Selected</h3>
+      <ul id="selected" class="chips"></ul>
+
+      <h2>2. Preferences</h2>
+      <form id="prefs">
+        {% csrf_token %}
+        <label>No classes before <input type="time" name="earliest" value="08:00"></label>
+        <label>Done by <input type="time" name="latest" value="18:00"></label>
+        <fieldset>
+          <legend>Days off</legend>
+          <label><input type="checkbox" name="daysOff" value="M"> Mon</label>
+          <label><input type="checkbox" name="daysOff" value="T"> Tue</label>
+          <label><input type="checkbox" name="daysOff" value="W"> Wed</label>
+          <label><input type="checkbox" name="daysOff" value="R"> Thu</label>
+          <label><input type="checkbox" name="daysOff" value="F"> Fri</label>
+        </fieldset>
+        <label><input type="checkbox" name="includeFull"> Include full sections (waitlist)</label>
+        <button type="submit">Generate schedules</button>
+      </form>
+    </section>
+
+    <section class="panel wide">
+      <h2>3. Schedules <span id="summary" class="muted"></span></h2>
+      <div id="message"></div>
+      <div id="nav" hidden>
+        <button id="prev">&larr;</button> <span id="position"></span> <button id="next">&rarr;</button>
+      </div>
+      <div id="calendar" class="calendar"></div>
+    </section>
+  </main>
+  <script src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="{% static 'scheduler/app.js' %}"></script>
+</body>
+</html>
