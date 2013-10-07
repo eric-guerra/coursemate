@@ -19,7 +19,7 @@ class TimeSlot:
     end: int
 
     def overlaps(self, other: "TimeSlot") -> bool:
-        return self.day == other.day and self.start <= other.end and other.start <= self.end
+        return self.day == other.day and self.start < other.end and other.start < self.end
 
 
 @dataclass(frozen=True)
